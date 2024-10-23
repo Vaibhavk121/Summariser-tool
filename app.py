@@ -10,8 +10,12 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Initialize the Huggingface summarizer pipeline
-summarizer = pipeline("summarization")
+# Explicitly specify the model name and revision for Hugging Face's summarizer pipeline
+model_name = "sshleifer/distilbart-cnn-12-6"  # You can switch to a smaller model like distilbart-cnn-6-6 if needed
+revision = "a4f8f3e"  # Ensure stable model version by specifying the revision
+
+# Initialize the Huggingface summarizer pipeline with explicit model and revision
+summarizer = pipeline("summarization", model=model_name, revision=revision)
 
 # Ensure the upload folder exists
 if not os.path.exists(UPLOAD_FOLDER):
